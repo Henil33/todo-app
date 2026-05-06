@@ -2,19 +2,20 @@ package com.todo.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
-import jdk.jfr.Enabled;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 public class Todo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
-    private String decription;
+    private String description;
 
     private boolean completed;
 

@@ -4,6 +4,7 @@ import com.todo.backend.entity.Todo;
 import com.todo.backend.repository.TodoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -20,4 +21,11 @@ public class HelloController {
     public List<Todo> getAllTodos() {
         return todoRepository.findAll();
     }
+
+    @PostMapping
+    public Todo createTodo(@RequestBody Todo todo) {
+        todo.setCreated_at(LocalDateTime.now());
+        return todoRepository.save(todo);
+    }
+
 }
