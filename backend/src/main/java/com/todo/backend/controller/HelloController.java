@@ -1,13 +1,23 @@
 package com.todo.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.todo.backend.entity.Todo;
+import com.todo.backend.repository.TodoRepository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
+@RequestMapping("/api/todos")
 public class HelloController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World";
+    private final TodoRepository todoRepository;
+
+    public HelloController(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
+
+    @GetMapping
+    public List<Todo> getAllTodos() {
+        return todoRepository.findAll();
     }
 }
