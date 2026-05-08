@@ -1,5 +1,6 @@
 package com.todo.backend.service;
 
+import com.todo.backend.dto.LoginRequest;
 import com.todo.backend.dto.RegisterRequest;
 import com.todo.backend.entity.User;
 import com.todo.backend.repository.UserRepository;
@@ -7,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -38,5 +40,29 @@ public class AuthService {
         userRepository.save(user);
 
         return "User Registered Succesfully";
+    }
+
+    public String login(LoginRequest request) {
+
+        Optional<User> optionalUser =
+                userRepository.findByEmail(request.getEmail());
+
+        if (optionalUser.isEmpty()) {
+            return "Invalid email or password";
+        }
+
+        User user = optionalUser.get();
+
+        boolean isPasswordCorrect =
+                passwordEncoder.matches(
+                        request.getPassword(),
+                        user.getPassword()
+                );
+
+        if (!isPasswordCorrect) {
+            return "Invalid email or password";
+        }
+
+        return "Login successful";
     }
 }

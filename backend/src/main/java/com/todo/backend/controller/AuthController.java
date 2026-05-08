@@ -1,5 +1,6 @@
 package com.todo.backend.controller;
 
+import com.todo.backend.dto.LoginRequest;
 import com.todo.backend.dto.RegisterRequest;
 import com.todo.backend.service.AuthService;
 import org.springframework.web.bind.annotation.*;
@@ -16,5 +17,10 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
         return authService.register(request);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }
