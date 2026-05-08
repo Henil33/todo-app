@@ -19,7 +19,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String Register(RegisterRequest request)
+    public String register(RegisterRequest request)
     {
         if(userRepository.existsByEmail(request.getEmail()))
         {
