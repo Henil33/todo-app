@@ -9,11 +9,11 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/todos")
-public class HelloController {
+public class TodoController {
 
     private final TodoRepository todoRepository;
 
-    public HelloController(TodoRepository todoRepository) {
+    public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
